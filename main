@@ -2,12 +2,22 @@ let HOURS = 23
 let MINUTES = 59
 let SECONDS = getSeconds(HOURS, MINUTES)
 
+// Pressing Button A increases Hours by 1
+input.onButtonPressed(Button.A, () => {
+    SECONDS += 3600
+})
+
+// Pressing Button A increases Minutes by 1
+input.onButtonPressed(Button.B, () => {
+    SECONDS += 60
+})
+
 input.onShake(() => {
     basic.showString(formatTime(SECONDS))
 })
 
 basic.forever(() => {
-    SECONDS = (SECONDS != 86400) ? SECONDS += 1 : 0
+    SECONDS = (SECONDS < 86400) ? SECONDS += 1 : 0
     basic.pause(965)
 })
 
