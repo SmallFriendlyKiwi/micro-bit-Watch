@@ -1,0 +1,25 @@
+let HOURS = 23
+let MINUTES = 59
+let SECONDS = getSeconds(HOURS, MINUTES)
+
+input.onShake(() => {
+    basic.showString(formatTime(SECONDS))
+})
+
+basic.forever(() => {
+    SECONDS = (SECONDS != 86400) ? SECONDS += 1 : 0
+    basic.pause(965)
+})
+
+function getSeconds(hours: number, minutes: number) {
+    return (hours * 3600) + (minutes * 60)
+}
+
+function formatTime(seconds: number) {
+    let hours: number = seconds / 3600
+    let minutes: number = (seconds - (hours * 3600)) / 60
+
+    let hh: string = (hours < 10) ? "0" + hours.toString() : hours.toString()
+    let mm: string = (minutes < 10) ? "0" + minutes.toString() : minutes.toString()
+    return hh + ":" + mm
+}
